@@ -39,19 +39,6 @@ inputUpload.addEventListener('change', async (event)=> {
 
 const inputTags = document.getElementById('input-tags')
 const listaTags = document.querySelector('.lista-tags')
- 
-inputTags.addEventListener('keypress', (event) => {
-    if(event.key === "Enter") {
-        event.preventDefault()
-        const tagTexto = inputTags.value.trim()
-        if(tagTexto != "") {
-            const tagNova = document.createElement('li')
-            tagNova.innerHTML = `<p>${tagTexto}</p> <img src="./img/close-black.svg" class="remove-tag">` 
-            listaTags.appendChild(tagNova)
-            inputTags.value = ''
-        }
-    }
-})
 
 listaTags.addEventListener('click', (event) => {
     if(event.target.classList.contains("remove-tag")) {
@@ -69,3 +56,40 @@ async function verificaTagsDisponiveis(tagTexto) {
         }, 1000)
     })
 }
+
+inputTags.addEventListener('keypress', async (event) => {
+    if(event.key === "Enter") {
+        event.preventDefault()
+        const tagTexto = inputTags.value.trim()
+        if(tagTexto != "") {
+            try{
+            const tagsExiste = await verificaTagsDisponiveis(tagTexto)
+            if(tagsExiste) {
+                const tagNova = document.createElement('li')
+                tagNova.innerHTML = `<p>${tagTexto}</p> <img src="./img/close-black.svg" class="remove-tag">` 
+                listaTags.appendChild(tagNova)
+                inputTags.value = ''
+                } else{
+                    alert('A tag não foi encontrada.')
+                }
+            } catch (error) {
+                console.error('Erro ao verificar a')
+                alert('Erro ao verificar a existência da tag. Verifique o console.')
+            }
+        }
+    }
+})
+
+const botaoPublicar = document.querySelector('.botao-publicar')
+
+botaoPublicar.addEventListener('click', async (event) => {
+    event.preventDefault()
+
+    const nomeDoProjeto = document.getElementById('nome').value
+    const descricaoDoProjeto = document.getElementById('descricao').value
+    const tagsProjeto = Array.from(listaTags.querySelectorAll('p')).map((tag) => tag.textContent)
+
+    console.log(nomeDoProjeto)
+    console.log(descricaoDoProjeto)
+    console.log(tagsProjeto)
+})
