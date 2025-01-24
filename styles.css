@@ -194,3 +194,46 @@ textarea{
     height: 100%;
     object-fit: cover;
 }
+
+.container-imagem{
+    height: 368px;
+    padding: 24px 16px;
+    background-color: var(--secondary-color);
+    border-radius: 9px;
+}
+
+.container-upload-imagem button{
+    margin: 16px 0 8px 0;
+    background-color: var(--itens-background);
+    color: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+    border-radius: 10px;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 18px;
+    position: relative;
+}
+
+.container-upload-imagem button::after{
+    content: '';
+    background-image: url(./img/upload.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 15px;
+    height: 15px;   
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 8px;
+}
+
+.container-imagem-nome{
+    display: flex;
+    gap: 10px;
+    color: var(--secondary-color);
+    font-size: 15px;
+}
