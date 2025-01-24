@@ -36,3 +36,19 @@ inputUpload.addEventListener('change', async (event)=> {
         }
     }
 })
+
+const inputTags = document.getElementById('input-tags')
+const listaTags = document.querySelector('.lista-tags')
+ 
+inputTags.addEventListener('keypress', (event) => {
+    if(event.key === "Enter") {
+        event.preventDefault()
+        const tagTexto = inputTags.value.trim()
+        if(tagTexto != "") {
+            const tagNova = document.createElement('li')
+            tagNova.innerHTML = `<p>${tagTexto}</p> <img src="./img/close-black.svg" class="remove-tag">` 
+            listaTags.appendChild(tagNova)
+            inputTags.value = ''
+        }
+    }
+})
